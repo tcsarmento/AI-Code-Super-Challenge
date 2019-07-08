@@ -1,7 +1,9 @@
 # DesafioTenico
 
-Script para criação da tabela
+#Script para criação da tabela
 
+
+```
 CREATE TABLE public.log
 (
     id integer NOT NULL,
@@ -19,8 +21,13 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.log
     OWNER to postgres;
+```
    
-##################################################################################################
+# Arquivo ConfiguracaoBanco.java estão as strings de conexão com o banco.
+
+
+#Backend java Spring boot
+#Frontend Angular
 
     
     
