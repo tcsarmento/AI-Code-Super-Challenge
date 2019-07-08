@@ -23,11 +23,13 @@ ALTER TABLE public.log
     OWNER to postgres;
 ```
    
-# Arquivo ConfiguracaoBanco.java estão as strings de conexão com o banco.
+# Configuração de banco de dados
+## As configurações de banco estão no arquivo ConfiguracaoBanco.java
 
+#Tencologias
 
-#Backend java Spring boot
-#Frontend Angular
+## Backend java Spring boot
+## Frontend Angular
 
     
     
