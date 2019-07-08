@@ -1,0 +1,60 @@
+<div class="container"> 
+    <h3>Cadastrar Log</h3>
+<form #pessoaForm="ngForm" novalidate>
+
+    <div class="form-group">
+            <label for="dtlog">Data*</label>
+            <input type="date" class="form-control" placeholder="Informe a Data" name="dtlog"
+                    [(ngModel)]="model.data" #data="ngModel">
+    </div>
+   
+   <!-- <input type="hidden" class="form-control" name="idpessoa" [(ngModel)]="model.idpessoa" #idpessoa="ngModel">-->
+    <div>
+        <label for="request" class="form-control-label">Request*</label>
+        <input type="text" class="form-control" placeholder="Informe o request" 
+                name="request" 
+                [(ngModel)]="model.request" #nome="ngModel"
+                required>
+       
+    </div>
+
+    <div>
+            <label for="status" class="form-control-label">Status*</label>
+            <input type="text" mask='000' class="form-control" placeholder="Informe o status" 
+                    name="status" 
+                    [(ngModel)]="model.status" #nome="ngModel"
+                    required>
+          <!--  <div class="form-control-feedback" [hidden]="nome.valid || nome.pristine">O campo nome deve ser informado</div>-->
+    </div>
+
+    <div>
+            <label for="userAgent" class="form-control-label">User Agent*</label>
+            <input type="text" class="form-control" placeholder="Informe o userAgent" 
+                    name="userAgent" 
+                    [(ngModel)]="model.userAgent" #nome="ngModel"
+                    required>
+          <!--  <div class="form-control-feedback" [hidden]="nome.valid || nome.pristine">O campo nome deve ser informado</div>-->
+    </div>
+
+    <div>
+            <label for="ip" class="form-control-label">IP*</label>
+            <input type="text" mask='000.000.000.000' class="form-control" placeholder="Informe o Ip" 
+                    name="ip" 
+                    [(ngModel)]="model.ip" #nome="ngModel"
+                    required>
+          <!--  <div class="form-control-feedback" [hidden]="nome.valid || nome.pristine">O campo nome deve ser informado</div>-->
+    </div>
+
+    <div>
+      <br/>
+     <label for="arquivo" class="form-control-label">Anexar arquivo de log</label>
+     <input  class="form-control" type="file" accept="txt/*" (change)="changeListener($event)">
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-success" (click)=salvar() >Salvar</button>
+     <a class="btn btn-secondary" routerLink="/">Voltar </a>
+</form>
+</div>

@@ -1,0 +1,17 @@
+<notifier-container></notifier-container>
+<ngx-spinner bdColor = "rgba(255,255,255,0)" size = "default" color = "#000000" type = "ball-clip-rotate" fullScreen="true"><p style="color: black" > Processando dados... </p></ngx-spinner>
+<nav class="navbar navbar-expand-lg navbar-light bg-faded d-flex justify-content-between">
+            <h1 class="xnavbar-brand">Gerenciador de Logs</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse col-md-4 align-self-end" id="navbarSupportedContent">
+            <form class="form-inline">
+                <button class="btn btn-outline-success" type="button" routerLink="/lista-log">Home </button>
+                <button class="btn btn-outline-success" type="button" routerLink="/form-log">Cadastrar Log</button>
+            </form>
+        </div>
+</nav>
+
+<router-outlet></router-outlet>  
+    
