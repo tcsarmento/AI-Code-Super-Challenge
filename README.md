@@ -24,12 +24,11 @@ ALTER TABLE public.log
 ```
    
 # Configuração de banco de dados
-## As configurações de banco estão no arquivo ConfiguracaoBanco.java
+## -As configurações de banco estão no arquivo ConfiguracaoBanco.java
 
-#Tencologias
-
-## Backend java Spring boot
-## Frontend Angular
+# Tencologias
+## -Backend java Spring boot
+## -Frontend Angular
 
     
     
