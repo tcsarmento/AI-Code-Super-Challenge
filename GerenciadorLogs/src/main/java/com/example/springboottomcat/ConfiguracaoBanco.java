@@ -15,10 +15,10 @@ public class ConfiguracaoBanco {
 		@Bean
 	    public DataSource dataSource(){
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	        dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-	        dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
-	        dataSource.setUsername("PRONAF");
-	        dataSource.setPassword("PRONAF");
+	        dataSource.setDriverClassName("org.postgresql.Driver");
+	        dataSource.setUrl("jdbc:postgresql://localhost/postgres");
+	        dataSource.setUsername("postgres");
+	        dataSource.setPassword("root");
 	        return dataSource;
 	    }
 		
@@ -29,8 +29,8 @@ public class ConfiguracaoBanco {
 			HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 			adapter.setDatabase(Database.ORACLE);
 			adapter.setShowSql(false);
-			adapter.setGenerateDdl(false);
-			adapter.setDatabasePlatform("org.hibernate.dialect.OracleDialect");
+			adapter.setGenerateDdl(true);
+			adapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
 			adapter.setPrepareConnection(true);
 			return adapter;
 		}

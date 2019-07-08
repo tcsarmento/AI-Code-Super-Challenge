@@ -41,12 +41,22 @@
 		<scope>runtime</scope>
 	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc7 -->
+<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 	<dependency>
-	    <groupId>com.oracle</groupId>
-	    <artifactId>ojdbc7</artifactId>
-	    <version>12.1.0.2</version>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.2.6</version>
 	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.0.12.Final</version>
+</dependency>
+	
+
+	
 	
 	<dependency>
     <groupId>commons-io</groupId>
