@@ -1,4 +1,4 @@
-# Module 22: Super Challenge - Troubleshooting Guide
+# Super Challenge - Troubleshooting Guide
 
 ## 🚨 Common Issues and Solutions
 
@@ -462,7 +462,6 @@ git stash  # Save work temporarily
 2. **Check the logs** - The answer is usually there
 3. **Simplify** - Comment out complex parts, get basics working
 4. **Use hints** - `python scripts/get_hint.py --task X`
-5. **Ask for help** - challenge-911@workshop.com
 
 Remember: A partial working solution is better than a perfect non-working one!
 
