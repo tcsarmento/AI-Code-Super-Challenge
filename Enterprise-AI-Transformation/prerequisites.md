@@ -1,27 +1,7 @@
-# Module 22: Super Challenge - Prerequisites
+# Super Challenge - Prerequisites
 
 ## 📋 Required Before Starting
 
-### 🎓 Knowledge Prerequisites
-
-You must have completed or have equivalent knowledge from:
-- **Modules 1-21** of the AI-Powered Development Workshop
-- OR demonstrate proficiency in all core technologies
-
-### 🛠️ Technical Prerequisites
-
-#### 1. Development Environment
-
-**Hardware Requirements:**
-- CPU: 8+ cores (Intel i7/AMD Ryzen 7 or better)
-- RAM: 32 GB minimum
-- Storage: 50 GB free SSD space
-- Network: Stable internet (25+ Mbps)
-
-**Operating System:**
-- Windows 11 Pro/Enterprise with WSL2
-- macOS 12+ (Apple Silicon supported)
-- Ubuntu 20.04+ / RHEL 8+
 
 #### 2. Software Installation Checklist
 
@@ -320,4 +300,4 @@ pip install -r requirements.txt
 
 ---
 
-**Important**: Ensure all prerequisites are met BEFORE starting the challenge. The 3-hour timer is strict, and technical issues won't extend your time.
+**Important**: Ensure all prerequisites are met BEFORE starting the challenge. The 4-hour timer is strict, and technical issues won't extend your time.
