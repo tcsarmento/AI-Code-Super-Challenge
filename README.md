@@ -100,6 +100,7 @@ Hands-on workshop for transforming Figma designs into production-ready code usin
 ## 👤 Credits
 
 This Challenges was developed by [Paula Silva](https://github.com/paulanunes85), AI App and Software Developer [Global Black Belt at Microsoft Americas](https://www.linkedin.com/in/paulanunes/).
+
 ---
 
 > **Challenge yourself, grow your skills, and have fun!**
