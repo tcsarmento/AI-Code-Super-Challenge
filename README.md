@@ -18,7 +18,7 @@ Here you will find two practical programming challenges designed to enhance your
 ---
 
 
-## 🏢 Challenge 1: Super Challenge - Enterprise AI Transformation
+## 🏢 Challenge 1: Enterprise AI Transformation
 Welcome to the ultimate test of your AI-powered development skills! This comprehensive challenge simulates a real-world enterprise transformation project. Your mission is to transform GlobalRetail Corp's legacy systems into a modern, AI-powered platform:
 
 - Modernize legacy COBOL inventory system
@@ -29,7 +29,7 @@ Welcome to the ultimate test of your AI-powered development skills! This compreh
 
 - **Suggested language:** Python (and other relevant technologies)
 - **Skills covered:** Enterprise modernization, microservices, AI integration, cloud deployment, security
-- **Challenge folder:** `Enterprise-AI-Transformation/`
+- **Challenge folder:** [`Enterprise-AI-Transformation/`](/Enterprise-AI-Transformation/README.md)
 
 
 ## 🏆 Challenge 2: Ultimate Mastery Challenge
@@ -45,7 +45,7 @@ Welcome to the pinnacle of your AI development journey! This comprehensive asses
 
 - **Suggested language:** Python, Shell Script, and other relevant technologies
 - **Skills covered:** Full-stack development, AI integration, microservices, automation, CI/CD, security, monitoring
-- **Challenge folder:** `Ultimate-Matery-Challenge/`
+- **Challenge folder:** [`Ultimate-Matery-Challenge/`](Ultimate-Matery-Challenge/README.md)
 
 ---
 
@@ -76,11 +76,6 @@ Welcome to the pinnacle of your AI development journey! This comprehensive asses
 - Full-stack and microservices architecture
 - Real-time analytics, automation, and AI integration
 - CI/CD, security, and monitoring best practices
-
-## 🤝 Community & Support
-
-- Join our GitHub Discussions for help and networking
-- Share your progress on social media with **#AICodeSuperChallenge**
 
 ---
 
