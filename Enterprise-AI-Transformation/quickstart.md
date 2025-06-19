@@ -1,34 +1,56 @@
-# 🚀 Module 22: Super Challenge - Quick Start Guide
+# 🚀 Quick Start Guide — Super Challenge
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Iconic_image_of_AI.svg" alt="AI Quickstart Banner" width="300px"/>
+
+---
+
+## 📚 Resources & Navigation
+
+- [Overview](README.md)
+- [Prerequisites](prerequisites.md)
+- [Solution Guide](solution-guide.md)
+- [Business Rules Card](business-rules-card.md)
+- [Cheatsheet](cheatsheet.md)
+- [Visual Guide](visual-guide.md)
+- [Troubleshooting](troubleshooting.md)
+
+---
+
 
 ## ⏱️ Time Management Strategy
 
+
 You have **4 hours** to complete the challenge. Here's the optimal time allocation:
 
-```
-00:00-00:15 (15 min) - Setup & Planning
-00:15-01:15 (90 min) - Core Services Implementation  
-01:15-02:15 (90 min) - AI Integration & Analytics
-02:15-02:45 (30 min) - Testing & Deployment
-02:45-03:00 (15 min) - Demo Preparation
-```
+| Time         | Task                        |
+|--------------|-----------------------------|
+| 00:00-00:15  | Setup & Planning            |
+| 00:15-01:15  | Core Services Implementation|
+| 01:15-02:15  | AI Integration & Analytics  |
+| 02:15-02:45  | Testing & Deployment        |
+| 02:45-03:00  | Demo Preparation            |
+
+
+
+---
 
 ## 🎯 Minimum Viable Solution
 
-### Must Have (80% of score)
-1. ✅ Transaction API working with business rules
-2. ✅ Basic fraud detection with AI
-3. ✅ Data persistence (PostgreSQL + Redis)
-4. ✅ Simple real-time dashboard
-5. ✅ One deployment method (local or cloud)
 
-### Nice to Have (20% bonus)
-1. ⭐ Advanced AI features (multi-agent, learning)
-2. ⭐ Full event streaming implementation
-3. ⭐ Complete cloud deployment
-4. ⭐ Comprehensive test coverage
-5. ⭐ Performance optimizations
+| Must Have (80% of score)         | Nice to Have (20% bonus)           |
+|----------------------------------|------------------------------------|
+| ✅ Transaction API w/ business rules | ⭐ Advanced AI features (multi-agent, learning) |
+| ✅ Basic fraud detection with AI  | ⭐ Full event streaming implementation |
+| ✅ Data persistence (PostgreSQL + Redis) | ⭐ Complete cloud deployment |
+| ✅ Simple real-time dashboard     | ⭐ Comprehensive test coverage      |
+| ✅ One deployment method         | ⭐ Performance optimizations        |
+
+
+
+---
 
 ## 🛠️ Quick Setup Commands
+
 
 ### 1. Initial Setup (5 minutes)
 ```bash
@@ -38,7 +60,34 @@ cd module-22-super-challenge
 
 # Run automated setup
 ./scripts/setup-challenge-env.sh
+```
 
+---
+
+## 🗺️ Architecture Flow
+
+```mermaid
+flowchart TD
+    S[Start] --> P[Setup & Planning]
+    P --> C[Core Services]
+    C --> A[AI Integration]
+    A --> T[Testing & Deployment]
+    T --> D[Demo Preparation]
+    D --> E[End]
+```
+
+---
+
+## ➡️ Next Steps
+
+1. [Check Prerequisites](prerequisites.md)
+2. [Review the Solution Guide](solution-guide.md)
+3. [Understand Business Rules](business-rules-card.md)
+4. [Use the Cheatsheet](cheatsheet.md) as you code
+5. [Visual Guide](visual-guide.md) for architecture
+6. [Troubleshooting](troubleshooting.md) if you get stuck
+
+---
 # Copy and configure environment
 cp .env.example .env
 # Edit .env with your Azure credentials

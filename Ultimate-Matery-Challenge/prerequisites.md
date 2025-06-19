@@ -1,3 +1,75 @@
+# 🧰 Prerequisites — Ultimate Mastery Challenge
+
+---
+## 📚 Resources & Navigation
+- [Overview](README.md)
+- [Architecture](architecture.md)
+- [Best Practices](best-practices.md)
+- [Challenge Part 1](challenge-part1.md)
+- [Challenge Part 2](challenge-part2.md)
+- [Challenge Part 3](challenge-part3.md)
+- [Resources](resources.md)
+- [Troubleshooting](troubleshooting.md)
+- [Visual Mapping](visual-mapping.md)
+
+---
+## 💻 Technical Requirements
+
+### Development Environment
+```bash
+python --version  # 3.11+
+node --version    # 18+
+dotnet --version  # 8.0+
+go version        # 1.21+ (optional but recommended)
+```
+
+| Tool      | Minimum Version |
+|-----------|----------------|
+| python    | 3.11+          |
+| node      | 18+            |
+| dotnet    | 8.0+           |
+| go        | 1.21+ (optional) |
+
+### 🖥️ Required Tools
+- VS Code with ALL workshop extensions
+- Git configured and working
+- Docker Desktop running
+- Azure CLI authenticated
+- GitHub CLI authenticated
+
+### ☁️ Cloud Resources
+- Azure Subscription: Active with sufficient credits
+- Resource Groups: Permission to create
+- Service Principals: Ability to create
+- GitHub: Repository creation rights
+
+### 📦 Installed SDKs & Frameworks
+```bash
+# Python ecosystem
+pip install fastapi uvicorn pytest black pylint
+pip install openai azure-ai-textanalytics pandas numpy
+pip install asyncio aiohttp redis celery
+
+# Node.js ecosystem
+npm install -g typescript @azure/functions-core-tools
+npm install -g @modelcontextprotocol/cli
+
+# .NET ecosystem
+dotnet tool install -g dotnet-ef
+```
+
+---
+
+## ➡️ Next Steps
+1. [Go to Architecture](architecture.md)
+2. [Review Best Practices](best-practices.md)
+3. [Start Challenge Part 1](challenge-part1.md)
+4. [Continue to Challenge Part 2](challenge-part2.md)
+5. [Finish with Challenge Part 3](challenge-part3.md)
+6. [Check Resources](resources.md) and [Troubleshooting](troubleshooting.md)
+7. [Visual Mapping](visual-mapping.md)
+
+---
 # Prerequisites: Ultimate Mastery Challenge
 
 

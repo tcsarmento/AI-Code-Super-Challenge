@@ -1,6 +1,19 @@
 # 📋 Business Rules Quick Reference Card
 
-## 💰 Transaction Limits
+---
+
+## � Resources & Navigation
+- [Overview](README.md)
+- [Quickstart](quickstart.md)
+- [Prerequisites](prerequisites.md)
+- [Solution Guide](solution-guide.md)
+- [Cheatsheet](cheatsheet.md)
+- [Visual Guide](visual-guide.md)
+- [Troubleshooting](troubleshooting.md)
+
+---
+
+## �💰 Transaction Limits
 
 | Rule | Value | Notes |
 |------|-------|-------|
@@ -37,6 +50,18 @@
 ## 🚨 Fraud Detection Rules
 
 ### Risk Score Calculation
+
+---
+
+## ➡️ Next Steps
+1. [Check Prerequisites](prerequisites.md)
+2. [Go to Quickstart](quickstart.md)
+3. [Review Solution Guide](solution-guide.md)
+4. [Use Cheatsheet](cheatsheet.md)
+5. [Visual Guide](visual-guide.md)
+6. [Troubleshooting](troubleshooting.md)
+
+---
 ```
 Base Score: 0
 + New Account (<30 days): +20 points
