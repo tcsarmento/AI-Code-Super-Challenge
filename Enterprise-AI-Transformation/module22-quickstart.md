@@ -2,12 +2,12 @@
 
 ## ⏱️ Time Management Strategy
 
-You have **3 hours** to complete the challenge. Here's the optimal time allocation:
+You have **4 hours** to complete the challenge. Here's the optimal time allocation:
 
 ```
 00:00-00:15 (15 min) - Setup & Planning
-00:15-01:15 (60 min) - Core Services Implementation  
-01:15-02:15 (60 min) - AI Integration & Analytics
+00:15-01:15 (90 min) - Core Services Implementation  
+01:15-02:15 (90 min) - AI Integration & Analytics
 02:15-02:45 (30 min) - Testing & Deployment
 02:45-03:00 (15 min) - Demo Preparation
 ```
@@ -340,14 +340,10 @@ Before time expires:
 - **Document Everything**: Explain what works and what doesn't
 - **Use AI Extensively**: This is an AI-powered development challenge
 - **Test as You Go**: Don't leave testing for the end
-- **Stay Calm**: 3 hours is enough if you stay focused
+- **Stay Calm**: 4 hours is enough if you stay focused
 
 ## 💪 You've Got This!
 
 The key to success is staying organized and leveraging AI tools effectively. Trust your training, use the provided resources, and build something amazing!
 
 **Good luck! May your code compile and your tests pass! 🚀**
-
----
-
-*Quick Help: challenge-911@workshop.com | Response within 5 minutes*
