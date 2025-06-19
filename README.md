@@ -99,8 +99,7 @@ Hands-on workshop for transforming Figma designs into production-ready code usin
 
 ## 👤 Credits
 
-This Design to Code Workshop was developed by [Paula Silva](https://github.com/paulanunes85), AI App and Software Developer [Global Black Belt at Microsoft Americas](https://www.linkedin.com/in/paulanunes/).focusing on bridging the gap between design and development through AI-powered automation. The workshop provides a comprehensive approach to implementing modern design-to-code workflows for enterprise software applications.
-
+This Challenges was developed by [Paula Silva](https://github.com/paulanunes85), AI App and Software Developer [Global Black Belt at Microsoft Americas](https://www.linkedin.com/in/paulanunes/).
 ---
 
 > **Challenge yourself, grow your skills, and have fun!**
