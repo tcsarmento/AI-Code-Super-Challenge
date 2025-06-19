@@ -1,4 +1,4 @@
-# Module 22: Super Challenge - Demo Script Template
+# Demo Script Template
 
 ## 🎬 5-Minute Demo Structure
 
@@ -291,24 +291,6 @@ latency at the 99th percentile..."
 ### For Business Value
 "This modernization not only reduces costs by 60% but also enables new revenue 
 streams through API monetization..."
-
-## 🎬 Recording Your Demo
-
-If recording for submission:
-
-```bash
-# Start recording (Linux)
-ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 \
-  -codec:v libx264 -preset fast -crf 22 \
-  demo-video.mp4
-
-# Start recording (Mac)
-ffmpeg -f avfoundation -i "1:0" -r 30 \
-  -codec:v libx264 -preset fast -crf 22 \
-  demo-video.mp4
-
-# Or use OBS Studio for cross-platform recording
-```
 
 ## ✅ Post-Demo Checklist
 
