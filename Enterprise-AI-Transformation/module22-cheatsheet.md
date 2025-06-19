@@ -1,6 +1,6 @@
-# 🎯 Module 22: Ultimate Cheat Sheet
+# 🎯 Ultimate Cheat Sheet
 
-## ⏱️ Time Breakdown (3 hours = 180 minutes)
+## ⏱️ Time Breakdown (4 hours = 240 minutes)
 
 ```
 [0-15 min]    Setup & Planning (DON'T SKIP!)
