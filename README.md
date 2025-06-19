@@ -13,7 +13,7 @@ Here you will find two practical programming challenges designed to enhance your
 | Challenge | Focus | Main Skills | Technologies | Folder |
 |-----------|-------|------------|--------------|--------|
 | 🏢 **Enterprise AI Transformation** | Modernize legacy systems, build AI microservices | Modernization, microservices, AI, cloud, security | Python, Azure, CI/CD | [`Enterprise-AI-Transformation/`](/Enterprise-AI-Transformation/README.md) |
-| 🏆 **Ultimate Mastery Challenge** | Build a full-stack AI enterprise system | Full-stack, AI, automation, CI/CD, monitoring | Python, Shell, Azure, Copilot | `Ultimate-Matery-Challenge/` |
+| 🏆 **Ultimate Mastery Challenge** | Build a full-stack AI enterprise system | Full-stack, AI, automation, CI/CD, monitoring | Python, Shell, Azure, Copilot | [`Ultimate-Matery-Challenge/`](Ultimate-Matery-Challenge/README.md) |
 
 ---
 
