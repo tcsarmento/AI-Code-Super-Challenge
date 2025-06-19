@@ -1,4 +1,4 @@
-# Module 22: Solution Architecture Guide
+# Solution Architecture Guide
 
 ## 🏗️ Recommended Architecture Pattern
 
