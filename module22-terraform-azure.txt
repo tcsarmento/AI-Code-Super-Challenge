@@ -1,0 +1,634 @@
+# Azure Infrastructure for Super Challenge
+# Complete Terraform configuration for all required Azure services
+
+terraform {
+  required_version = ">= 1.5.0"
+  
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.85.0"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~> 2.47.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6.0"
+    }
+  }
+  
+  # Backend configuration for state storage
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-state"
+    storage_account_name = "tfstatesuperchallenge"
+    container_name       = "tfstate"
+    key                  = "superchallenge.terraform.tfstate"
+  }
+}
+
+# Configure Azure Provider
+provider "azurerm" {
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy = true
+    }
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
+}
+
+# Variables
+variable "environment" {
+  description = "Environment name"
+  type        = string
+  default     = "prod"
+}
+
+variable "location" {
+  description = "Azure region"
+  type        = string
+  default     = "eastus2"
+}
+
+variable "location_short" {
+  description = "Short location code"
+  type        = string
+  default     = "eus2"
+}
+
+variable "project_name" {
+  description = "Project name"
+  type        = string
+  default     = "superchallenge"
+}
+
+# Local variables
+locals {
+  resource_prefix = "${var.project_name}-${var.environment}"
+  
+  tags = {
+    Environment = var.environment
+    Project     = "SuperChallenge"
+    Module      = "22"
+    ManagedBy   = "Terraform"
+    CostCenter  = "Workshop"
+  }
+  
+  # Network configuration
+  vnet_address_space = ["10.0.0.0/16"]
+  
+  subnets = {
+    aks_subnet = {
+      name             = "snet-aks"
+      address_prefixes = ["10.0.1.0/24"]
+    }
+    app_subnet = {
+      name             = "snet-app"
+      address_prefixes = ["10.0.2.0/24"]
+    }
+    data_subnet = {
+      name             = "snet-data"
+      address_prefixes = ["10.0.3.0/24"]
+    }
+    private_endpoints = {
+      name             = "snet-privateendpoints"
+      address_prefixes = ["10.0.4.0/24"]
+    }
+  }
+}
+
+# Random suffix for globally unique names
+resource "random_string" "unique" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
+# Resource Group
+resource "azurerm_resource_group" "main" {
+  name     = "rg-${local.resource_prefix}-${var.location_short}"
+  location = var.location
+  tags     = local.tags
+}
+
+# Virtual Network
+resource "azurerm_virtual_network" "main" {
+  name                = "vnet-${local.resource_prefix}"
+  address_space       = local.vnet_address_space
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = local.tags
+}
+
+# Subnets
+resource "azurerm_subnet" "subnets" {
+  for_each = local.subnets
+  
+  name                 = each.value.name
+  resource_group_name  = azurerm_resource_group.main.name
+  virtual_network_name = azurerm_virtual_network.main.name
+  address_prefixes     = each.value.address_prefixes
+  
+  # Enable private endpoints for data subnet
+  private_endpoint_network_policies_enabled = each.key == "private_endpoints" ? false : true
+}
+
+# Network Security Groups
+resource "azurerm_network_security_group" "aks" {
+  name                = "nsg-aks-${local.resource_prefix}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = local.tags
+}
+
+resource "azurerm_network_security_group" "app" {
+  name                = "nsg-app-${local.resource_prefix}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = local.tags
+}
+
+# NSG associations
+resource "azurerm_subnet_network_security_group_association" "aks" {
+  subnet_id                 = azurerm_subnet.subnets["aks_subnet"].id
+  network_security_group_id = azurerm_network_security_group.aks.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "app" {
+  subnet_id                 = azurerm_subnet.subnets["app_subnet"].id
+  network_security_group_id = azurerm_network_security_group.app.id
+}
+
+# User Assigned Managed Identity for AKS
+resource "azurerm_user_assigned_identity" "aks" {
+  name                = "id-aks-${local.resource_prefix}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = local.tags
+}
+
+# Azure Container Registry
+resource "azurerm_container_registry" "main" {
+  name                = "acr${var.project_name}${random_string.unique.result}"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  sku                 = "Premium"
+  admin_enabled       = false
+  
+  tags = local.tags
+}
+
+# Role assignment for AKS to pull from ACR
+resource "azurerm_role_assignment" "aks_acr_pull" {
+  principal_id                     = azurerm_kubernetes_cluster.main.kubelet_identity[0].object_id
+  role_definition_name             = "AcrPull"
+  scope                            = azurerm_container_registry.main.id
+  skip_service_principal_aad_check = true
+}
+
+# Azure Kubernetes Service
+resource "azurerm_kubernetes_cluster" "main" {
+  name                = "aks-${local.resource_prefix}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  dns_prefix          = "aks-${local.resource_prefix}"
+  kubernetes_version  = "1.28.3"
+  
+  default_node_pool {
+    name                = "system"
+    node_count          = 2
+    vm_size             = "Standard_D4s_v5"
+    os_disk_size_gb     = 100
+    vnet_subnet_id      = azurerm_subnet.subnets["aks_subnet"].id
+    enable_auto_scaling = true
+    min_count           = 2
+    max_count           = 5
+    
+    node_labels = {
+      "nodepool-type" = "system"
+      "environment"   = var.environment
+    }
+    
+    tags = local.tags
+  }
+  
+  # Additional node pool for applications
+  auto_scaler_profile {
+    max_graceful_termination_sec = 600
+    scale_down_delay_after_add   = "10m"
+    scale_down_unneeded          = "10m"
+    scale_down_utilization_threshold = 0.5
+  }
+  
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.aks.id]
+  }
+  
+  network_profile {
+    network_plugin     = "azure"
+    network_policy     = "calico"
+    dns_service_ip     = "10.100.0.10"
+    service_cidr       = "10.100.0.0/16"
+    load_balancer_sku  = "standard"
+  }
+  
+  oms_agent {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+  }
+  
+  azure_active_directory_role_based_access_control {
+    managed = true
+    azure_rbac_enabled = true
+  }
+  
+  tags = local.tags
+}
+
+# Additional node pool for workloads
+resource "azurerm_kubernetes_cluster_node_pool" "workload" {
+  name                  = "workload"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
+  vm_size               = "Standard_D8s_v5"
+  node_count            = 3
+  vnet_subnet_id        = azurerm_subnet.subnets["aks_subnet"].id
+  
+  enable_auto_scaling = true
+  min_count           = 3
+  max_count           = 10
+  
+  node_labels = {
+    "nodepool-type" = "workload"
+    "workload"      = "apps"
+  }
+  
+  tags = local.tags
+}
+
+# Log Analytics Workspace
+resource "azurerm_log_analytics_workspace" "main" {
+  name                = "log-${local.resource_prefix}-${random_string.unique.result}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+  tags                = local.tags
+}
+
+# Application Insights
+resource "azurerm_application_insights" "main" {
+  name                = "appi-${local.resource_prefix}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  workspace_id        = azurerm_log_analytics_workspace.main.id
+  application_type    = "web"
+  tags                = local.tags
+}
+
+# Azure Key Vault
+resource "azurerm_key_vault" "main" {
+  name                = "kv-${var.project_name}${random_string.unique.result}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  sku_name            = "standard"
+  
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = true
+  
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+    
+    ip_rules = []  # Add your IP for development
+  }
+  
+  tags = local.tags
+}
+
+# Key Vault access policy for current user
+resource "azurerm_key_vault_access_policy" "current_user" {
+  key_vault_id = azurerm_key_vault.main.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azurerm_client_config.current.object_id
+  
+  secret_permissions = [
+    "Get", "List", "Set", "Delete", "Purge", "Recover"
+  ]
+}
+
+# Key Vault access for AKS
+resource "azurerm_key_vault_access_policy" "aks" {
+  key_vault_id = azurerm_key_vault.main.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_kubernetes_cluster.main.key_vault_secrets_provider[0].secret_identity[0].object_id
+  
+  secret_permissions = ["Get", "List"]
+}
+
+# Azure PostgreSQL Flexible Server
+resource "azurerm_postgresql_flexible_server" "main" {
+  name                = "psql-${local.resource_prefix}-${random_string.unique.result}"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  version             = "15"
+  
+  administrator_login    = "psqladmin"
+  administrator_password = random_password.postgresql.result
+  
+  storage_mb = 32768
+  sku_name   = "GP_Standard_D4s_v3"
+  
+  backup_retention_days = 7
+  geo_redundant_backup_enabled = false
+  
+  tags = local.tags
+}
+
+# PostgreSQL Database
+resource "azurerm_postgresql_flexible_server_database" "transactions" {
+  name      = "transactions"
+  server_id = azurerm_postgresql_flexible_server.main.id
+  charset   = "UTF8"
+  collation = "en_US.utf8"
+}
+
+# PostgreSQL Firewall Rule (for development - remove in production)
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure" {
+  name             = "AllowAzureServices"
+  server_id        = azurerm_postgresql_flexible_server.main.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
+
+# Azure Cache for Redis
+resource "azurerm_redis_cache" "main" {
+  name                = "redis-${local.resource_prefix}-${random_string.unique.result}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  capacity            = 2
+  family              = "C"
+  sku_name            = "Standard"
+  enable_non_ssl_port = false
+  minimum_tls_version = "1.2"
+  
+  redis_configuration {
+    maxmemory_policy = "allkeys-lru"
+  }
+  
+  tags = local.tags
+}
+
+# Azure Cosmos DB Account
+resource "azurerm_cosmosdb_account" "main" {
+  name                = "cosmos-${local.resource_prefix}-${random_string.unique.result}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  offer_type          = "Standard"
+  kind                = "MongoDB"
+  
+  enable_automatic_failover = false
+  
+  capabilities {
+    name = "EnableMongo"
+  }
+  
+  consistency_policy {
+    consistency_level       = "Session"
+    max_interval_in_seconds = 5
+    max_staleness_prefix    = 100
+  }
+  
+  geo_location {
+    location          = azurerm_resource_group.main.location
+    failover_priority = 0
+  }
+  
+  tags = local.tags
+}
+
+# Cosmos DB MongoDB Database
+resource "azurerm_cosmosdb_mongo_database" "analytics" {
+  name                = "analytics"
+  resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
+  account_name        = azurerm_cosmosdb_account.main.name
+  throughput          = 400
+}
+
+# Event Hubs Namespace
+resource "azurerm_eventhub_namespace" "main" {
+  name                = "evhns-${local.resource_prefix}-${random_string.unique.result}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  sku                 = "Standard"
+  capacity            = 2
+  
+  tags = local.tags
+}
+
+# Event Hub
+resource "azurerm_eventhub" "transactions" {
+  name                = "transactions"
+  namespace_name      = azurerm_eventhub_namespace.main.name
+  resource_group_name = azurerm_resource_group.main.name
+  partition_count     = 4
+  message_retention   = 7
+}
+
+# Event Hub Consumer Group
+resource "azurerm_eventhub_consumer_group" "analytics" {
+  name                = "analytics-consumer"
+  namespace_name      = azurerm_eventhub_namespace.main.name
+  eventhub_name       = azurerm_eventhub.transactions.name
+  resource_group_name = azurerm_resource_group.main.name
+}
+
+# Azure OpenAI Service
+resource "azurerm_cognitive_account" "openai" {
+  name                = "oai-${local.resource_prefix}-${random_string.unique.result}"
+  location            = "eastus"  # Azure OpenAI limited regions
+  resource_group_name = azurerm_resource_group.main.name
+  kind                = "OpenAI"
+  sku_name            = "S0"
+  
+  custom_subdomain_name = "oai-${local.resource_prefix}-${random_string.unique.result}"
+  
+  tags = local.tags
+}
+
+# Azure OpenAI Deployment
+resource "azurerm_cognitive_deployment" "gpt4" {
+  name               = "gpt-4"
+  cognitive_account_id = azurerm_cognitive_account.openai.id
+  
+  model {
+    format  = "OpenAI"
+    name    = "gpt-4"
+    version = "0613"
+  }
+  
+  scale {
+    type = "Standard"
+  }
+}
+
+# Storage Account for Function Apps and Blob Storage
+resource "azurerm_storage_account" "main" {
+  name                     = "st${var.project_name}${random_string.unique.result}"
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  
+  min_tls_version = "TLS1_2"
+  
+  tags = local.tags
+}
+
+# API Management (optional - for API Gateway)
+resource "azurerm_api_management" "main" {
+  name                = "apim-${local.resource_prefix}-${random_string.unique.result}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  publisher_name      = "Super Challenge Team"
+  publisher_email     = "admin@superchallenge.com"
+  sku_name            = "Developer_1"
+  
+  tags = local.tags
+}
+
+# Private DNS Zones for Private Endpoints
+resource "azurerm_private_dns_zone" "zones" {
+  for_each = {
+    postgres = "privatelink.postgres.database.azure.com"
+    redis    = "privatelink.redis.cache.windows.net"
+    cosmos   = "privatelink.mongo.cosmos.azure.com"
+    keyvault = "privatelink.vaultcore.azure.net"
+  }
+  
+  name                = each.value
+  resource_group_name = azurerm_resource_group.main.name
+  
+  tags = local.tags
+}
+
+# Link Private DNS Zones to VNet
+resource "azurerm_private_dns_zone_virtual_network_link" "links" {
+  for_each = azurerm_private_dns_zone.zones
+  
+  name                  = "${each.key}-link"
+  resource_group_name   = azurerm_resource_group.main.name
+  private_dns_zone_name = each.value.name
+  virtual_network_id    = azurerm_virtual_network.main.id
+  registration_enabled  = false
+  
+  tags = local.tags
+}
+
+# Data sources
+data "azurerm_client_config" "current" {}
+
+# Random password for PostgreSQL
+resource "random_password" "postgresql" {
+  length  = 32
+  special = true
+}
+
+# Store secrets in Key Vault
+resource "azurerm_key_vault_secret" "postgresql_connection_string" {
+  name         = "postgresql-connection-string"
+  value        = "postgresql://${azurerm_postgresql_flexible_server.main.administrator_login}:${random_password.postgresql.result}@${azurerm_postgresql_flexible_server.main.fqdn}:5432/${azurerm_postgresql_flexible_server_database.transactions.name}?sslmode=require"
+  key_vault_id = azurerm_key_vault.main.id
+  
+  depends_on = [azurerm_key_vault_access_policy.current_user]
+}
+
+resource "azurerm_key_vault_secret" "redis_connection_string" {
+  name         = "redis-connection-string"
+  value        = azurerm_redis_cache.main.primary_connection_string
+  key_vault_id = azurerm_key_vault.main.id
+  
+  depends_on = [azurerm_key_vault_access_policy.current_user]
+}
+
+resource "azurerm_key_vault_secret" "cosmos_connection_string" {
+  name         = "cosmos-connection-string"
+  value        = azurerm_cosmosdb_account.main.connection_strings[0]
+  key_vault_id = azurerm_key_vault.main.id
+  
+  depends_on = [azurerm_key_vault_access_policy.current_user]
+}
+
+resource "azurerm_key_vault_secret" "eventhub_connection_string" {
+  name         = "eventhub-connection-string"
+  value        = azurerm_eventhub_namespace.main.default_primary_connection_string
+  key_vault_id = azurerm_key_vault.main.id
+  
+  depends_on = [azurerm_key_vault_access_policy.current_user]
+}
+
+resource "azurerm_key_vault_secret" "openai_key" {
+  name         = "openai-key"
+  value        = azurerm_cognitive_account.openai.primary_access_key
+  key_vault_id = azurerm_key_vault.main.id
+  
+  depends_on = [azurerm_key_vault_access_policy.current_user]
+}
+
+resource "azurerm_key_vault_secret" "application_insights_key" {
+  name         = "application-insights-key"
+  value        = azurerm_application_insights.main.instrumentation_key
+  key_vault_id = azurerm_key_vault.main.id
+  
+  depends_on = [azurerm_key_vault_access_policy.current_user]
+}
+
+# Outputs
+output "resource_group_name" {
+  value = azurerm_resource_group.main.name
+}
+
+output "aks_cluster_name" {
+  value = azurerm_kubernetes_cluster.main.name
+}
+
+output "acr_login_server" {
+  value = azurerm_container_registry.main.login_server
+}
+
+output "keyvault_name" {
+  value = azurerm_key_vault.main.name
+}
+
+output "postgresql_fqdn" {
+  value = azurerm_postgresql_flexible_server.main.fqdn
+}
+
+output "redis_hostname" {
+  value = azurerm_redis_cache.main.hostname
+}
+
+output "cosmos_endpoint" {
+  value = azurerm_cosmosdb_account.main.endpoint
+}
+
+output "eventhub_namespace" {
+  value = azurerm_eventhub_namespace.main.name
+}
+
+output "openai_endpoint" {
+  value = azurerm_cognitive_account.openai.endpoint
+}
+
+output "application_insights_connection_string" {
+  value = azurerm_application_insights.main.connection_string
+  sensitive = true
+}
+
+# Script to get AKS credentials
+output "get_credentials_command" {
+  value = "az aks get-credentials --resource-group ${azurerm_resource_group.main.name} --name ${azurerm_kubernetes_cluster.main.name}"
+}
