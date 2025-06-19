@@ -1,4 +1,4 @@
-# Module 30: Resources and Quick Reference
+# Resources and Quick Reference
 
 ## 🚀 Quick Command Reference
 
