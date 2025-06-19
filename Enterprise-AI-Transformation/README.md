@@ -5,7 +5,6 @@
 **Duration:** 3 hours  
 **Difficulty:** Expert  
 **Type:** Comprehensive hands-on challenge  
-**Pass Score:** 80/100
 
 ## 📋 Table of Contents
 
