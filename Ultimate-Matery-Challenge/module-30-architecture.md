@@ -1,4 +1,4 @@
-# MasteryEd Platform - System Architecture
+# Mastery Platform - System Architecture
 
 ## 🏗️ Complete System Architecture
 
