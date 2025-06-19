@@ -1,9 +1,7 @@
-# 🤖 AI-Code-Super-Challenge
+# 🤖 Mastery AI Development Challenge
 
 
-<img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/github.svg" alt="AI Challenge Banner" width="100%"/>
-
-Welcome to the **AI-Code-Super-Challenge** repository!
+Welcome to the **Mastery AI Development Challenge** repository!
 
 
 Here you will find two practical programming challenges designed to enhance your skills in Artificial Intelligence, automation, and best coding practices.
@@ -51,28 +49,10 @@ Welcome to the pinnacle of your AI development journey! This comprehensive asses
 
 ---
 
-## 🗺️ Architecture Overview
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Iconic_image_of_AI.svg" alt="AI Architecture" width="400px"/>
-
-```mermaid
-flowchart TD
-    A[Legacy System] -->|Transform| B[Microservices]
-    B --> C[AI Services]
-    C --> D[Real-time Analytics]
-    D --> E[Cloud Deployment]
-    E --> F[User Access]
-```
-
----
-
 ## 📝 How to participate
 1. Fork this repository.
 2. Choose one or both challenges and follow the instructions in their respective folders.
 3. Submit your solutions via Pull Request.
-
-
----
 
 ---
 
