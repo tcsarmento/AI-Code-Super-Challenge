@@ -1,6 +1,4 @@
-# Module 22: Additional Essential Resources
-
-## 🚀 Recursos Adicionais Recomendados
+#  Additional Essential Resources
 
 ### 1. 🔄 Reset & Recovery Scripts
 
@@ -713,41 +711,3 @@ git add -A && git commit -m "Emergency save"
 docker-compose up -d postgres redis && python src/transaction-service/main.py
 ```
 ```
-
-## Recursos Adicionais Essenciais
-
-### 11. 📱 Mobile Dashboard Preview
-- Template HTML/CSS para visualização mobile
-- WebSocket client example
-- Chart.js quick templates
-
-### 12. 🔐 Security Checklist
-- SQL injection test cases
-- Authentication implementation examples
-- Rate limiting configuration
-
-### 13. 📊 Grafana Dashboard Template
-- Pre-configured dashboard JSON
-- Prometheus queries
-- Alert rules
-
-### 14. 🎯 Architecture Decision Records (ADRs)
-- Templates for documenting decisions
-- Example ADRs for common choices
-
-### 15. 🏗️ Microservices Communication Patterns
-- gRPC examples
-- Message queue patterns
-- Circuit breaker implementation
-
-Estes recursos adicionais cobrem:
-- **Recovery rápido** quando algo dá errado
-- **Análise automática** da qualidade da solução
-- **Monitoramento em tempo real** do progresso
-- **Extração automática** de regras do COBOL
-- **Templates de prompts** para AI
-- **CI/CD pronto** para usar
-- **Guias de otimização** específicos
-- **Comandos rápidos** para copiar/colar
-
-Isso deve dar aos participantes todas as ferramentas necessárias para ter sucesso no desafio!
