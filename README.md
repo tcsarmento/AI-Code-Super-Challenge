@@ -89,7 +89,8 @@ flowchart TD
 - Earn digital certificates of completion
 - Climb the leaderboard and gain community recognition
 
-## � What You'll Learn
+
+## 📚 What You'll Learn
 
 - Enterprise modernization and cloud deployment
 - Full-stack and microservices architecture
@@ -103,11 +104,7 @@ flowchart TD
 
 ---
 
----
-
 > **Challenge yourself, grow your skills, and have fun!**
-
----
 
 ---
 
