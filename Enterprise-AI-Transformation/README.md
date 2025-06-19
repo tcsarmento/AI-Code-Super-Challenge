@@ -1,5 +1,49 @@
 # Super Challenge - Enterprise AI Transformation
 
+## 📚 Resources & Navigation
+
+- [Quickstart](quickstart.md) — Start here for a fast setup
+- [Prerequisites](prerequisites.md) — Environment and tools needed
+- [Solution Guide](solution-guide.md) — Step-by-step solution hints
+- [Business Rules Card](business-rules-card.md) — Key business logic
+- [Cheatsheet](cheatsheet.md) — Quick reference for commands and concepts
+- [Visual Guide](visual-guide.md) — Diagrams and flows
+- [Resources Summary](resources-summary.md) — All resources at a glance
+- [Additional Resources](additional-resources.md) — Extra learning material
+- [Troubleshooting](troubleshooting.md) — Fix common issues
+- [Demo Presentation Script](demo-presentation-script.md) — For your final demo
+- [Error Recovery](error-recovery.md) — Handle and recover from errors
+- [Complete Package](complete-package.md) — All-in-one reference
+- [K8s Manifests](k8s-manifests.txt) — Kubernetes deployment
+- [Terraform for Azure](terraform-azure.txt) — Infrastructure as code
+- [Integration Tests (Python)](integration-tests.py) — Automated integration tests
+- [Performance Test (Python)](performance-test.py) — Performance validation
+- [Validation Script (Python)](validation-script.py) — Final checks
+- [Start Script (Shell)](start-script.sh) — Launch your environment
+
+### 🔗 Quick Navigation
+- Next: [Read the Quickstart](quickstart.md)
+
+---
+
+## ➡️ Next Steps
+
+1. [Read the Quickstart](quickstart.md)
+2. [Check Prerequisites](prerequisites.md)
+3. [Review the Solution Guide](solution-guide.md)
+4. [Understand Business Rules](business-rules-card.md)
+5. [Use the Cheatsheet](cheatsheet.md) as you code
+6. [Visual Guide](visual-guide.md) for architecture
+7. [Resources Summary](resources-summary.md) and [Additional Resources](additional-resources.md)
+8. [Troubleshooting](troubleshooting.md) if you get stuck
+9. [Demo Presentation Script](demo-presentation-script.md) for your final pitch
+10. [Error Recovery](error-recovery.md) and [Complete Package](complete-package.md) for advanced help
+11. [K8s Manifests](k8s-manifests.txt) and [Terraform for Azure](terraform-azure.txt) for deployment
+12. [Integration Tests](integration-tests.py), [Performance Test](performance-test.py), [Validation Script](validation-script.py) for validation
+13. [Start Script](start-script.sh) to launch your environment
+
+---
+
 ## 🏆 Challenge Overview
 
 Welcome to the ultimate test of your AI-powered development skills! This comprehensive 3-hour challenge simulates a real-world enterprise transformation project. 

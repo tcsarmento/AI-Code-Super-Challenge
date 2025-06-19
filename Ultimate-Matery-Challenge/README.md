@@ -1,5 +1,37 @@
 # Ultimate Mastery Challenge 🏆
 
+## 📚 Resources & Navigation
+
+- [Prerequisites](prerequisites.md) — Start here to set up your environment
+- [Architecture](architecture.md) — Understand the system design
+- [Best Practices](best-practices.md) — Tips for high-quality solutions
+- [Challenge Part 1](challenge-part1.md) — Begin the challenge
+- [Challenge Part 2](challenge-part2.md) — Continue building
+- [Challenge Part 3](challenge-part3.md) — Finalize and integrate
+- [Resources](resources.md) — Useful links and docs
+- [Troubleshooting](troubleshooting.md) — Solve common issues
+- [Visual Mapping](visual-mapping.md) — Visualize the challenge
+- [Start Script (Shell)](start-script.sh) — Launch your environment
+
+### 🔗 Quick Navigation
+- Next: [Read the Prerequisites](prerequisites.md)
+
+---
+
+## ➡️ Next Steps
+
+1. [Review Prerequisites](prerequisites.md)
+2. [Understand the Architecture](architecture.md)
+3. [Read Best Practices](best-practices.md)
+4. [Start Challenge Part 1](challenge-part1.md)
+5. [Continue to Challenge Part 2](challenge-part2.md)
+6. [Finish with Challenge Part 3](challenge-part3.md)
+7. [Check Resources](resources.md) and [Troubleshooting](troubleshooting.md) as needed
+8. [Visual Mapping](visual-mapping.md) for a big-picture view
+9. [Run the Start Script](start-script.sh) when ready
+
+---
+
 ## Your Final Test to Become an AI Development Master
 
 Welcome to the pinnacle of your AI development journey! This is a comprehensive 3-hour assessment that validates your mastery across AI Development. This is not just a test—it's your opportunity to demonstrate that you can integrate everything you've learned into production-ready solutions.
