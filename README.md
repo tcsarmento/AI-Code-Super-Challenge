@@ -1,7 +1,7 @@
 # 🤖 Mastery AI Development Challenge
 
 
-Welcome to the **Mastery AI Development Challenge** repository!
+## Welcome to the **Mastery AI Development Challenge** repository!
 
 
 Here you will find two practical programming challenges designed to enhance your skills in Artificial Intelligence, automation, and best coding practices.
@@ -62,12 +62,7 @@ Welcome to the pinnacle of your AI development journey! This comprehensive asses
 - Network with a community of passionate developers
 - All skill levels welcome—learn as you go!
 
-## 🥇 Recognition & Rewards
-
-- Top solutions may be featured in the repository
-- Earn digital certificates of completion
-- Climb the leaderboard and gain community recognition
-
+---
 
 ## 📚 What You'll Learn
 
