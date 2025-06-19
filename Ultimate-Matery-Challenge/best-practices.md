@@ -393,8 +393,6 @@ Hour 3 (AI & Integration):
 
 ## 🏁 Final Checklist
 
-Before submission, ensure:
-
 ### Code Quality
 - [ ] No hardcoded secrets
 - [ ] Proper error handling everywhere
