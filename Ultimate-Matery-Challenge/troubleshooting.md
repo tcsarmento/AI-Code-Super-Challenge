@@ -1,4 +1,4 @@
-# Module 30: Challenge Troubleshooting Guide
+# Challenge Troubleshooting Guide
 
 ## 🚨 Common Issues and Quick Fixes
 
