@@ -1,17 +1,17 @@
-# 📊 Module 22: Visual Process Guide
+# 📊 Visual Process Guide
 
 ## 🗺️ Challenge Roadmap
 
 ```mermaid
 graph TB
-    Start([🚀 START - 3 Hours]) --> Setup[⚙️ Setup Environment<br/>15 min]
+    Start([🚀 START - 4 Hours]) --> Setup[⚙️ Setup Environment<br/>15 min]
     
-    Setup --> Phase1[📦 Phase 1: Core Services<br/>45 min]
+    Setup --> Phase1[📦 Phase 1: Core Services<br/>90 min]
     
     Phase1 --> TransSvc[Transaction Service<br/>- Validate rules<br/>- Process payments<br/>- Update balances]
     Phase1 --> FraudSvc[Fraud Service<br/>- Rule engine<br/>- AI integration<br/>- Risk scoring]
     
-    TransSvc --> Phase2[🤖 Phase 2: Integration<br/>60 min]
+    TransSvc --> Phase2[🤖 Phase 2: Integration<br/>90 min]
     FraudSvc --> Phase2
     
     Phase2 --> Analytics[Analytics Service<br/>- Event streaming<br/>- Metrics calc<br/>- WebSocket]
@@ -23,7 +23,7 @@ graph TB
     Phase3 --> Perf[Performance Test<br/>- Latency check<br/>- Load test<br/>- Optimization]
     Phase3 --> Deploy[Deployment<br/>- Docker build<br/>- K8s manifests<br/>- Cloud ready]
     
-    Perf --> Demo[🎬 Demo Prep<br/>15 min]
+    Perf --> Demo[🎬 Demo Prep<br/>30 min]
     Deploy --> Demo
     
     Demo --> End([🏁 SUBMIT])
