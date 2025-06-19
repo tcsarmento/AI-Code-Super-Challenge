@@ -7,7 +7,7 @@ Welcome to the pinnacle of your AI development journey! This is a comprehensive 
 ## 📋 Module Overview
 
 ### Duration
-⏱️ **Total Time**: 4 hours 
+⏱️ **Total Time**: 3 hours 
 - **Hour 1**: Foundation to Intermediate 
 - **Hour 2**: Advanced to Enterprise 
 - **Hour 3**: Agents and Integration 
